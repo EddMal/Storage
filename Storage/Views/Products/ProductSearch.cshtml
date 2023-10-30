@@ -1,35 +1,17 @@
 ﻿@model IEnumerable<Storage.Models.ProductViewModel>
 
 @{
-    ViewData["Title"] = "ProductViewModel";
-    string searchInput;
+    ViewData["Title"] = "ProductSearch";
 }
 
-<h1>ProductViewModel</h1>
-
-
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="ProductSearchViewModel">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label for="category">Email address</label>
-                <input type="text" class="form-control" id="category" placeholder="Category">
-            </div>
-            <div class="form-group">
-                <input type="submit" value="category" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<h1>ProductSearch</h1>
 
 <p>
-   
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
-
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -64,7 +46,6 @@
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    
             </td>
         </tr>
 }

@@ -17,7 +17,7 @@ namespace Storage.Data
 
         public DbSet<Storage.Models.Product> Product { get; set; } = default!;
 
-        //Removed prodoctViewModel
+        //Removed prodoctViewModel (auto generated)
 
     }
 }

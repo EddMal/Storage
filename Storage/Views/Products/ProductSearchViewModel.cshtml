@@ -1,13 +1,16 @@
 ﻿@model IEnumerable<Storage.Models.ProductViewModel>
 
 @{
-    ViewData["Title"] = "ProductViewModel";
-    string searchInput;
+    ViewData["Title"] = "ProductSearchViewModel";
 }
 
-<h1>ProductViewModel</h1>
+<h1>ProductSearchViewModel</h1>
 
+<a asp-action="ProductSearchViewModel">Search products</a>
+<h1>Filter by search</h1>
 
+<h4>Product</h4>
+<hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="ProductSearchViewModel">
@@ -23,13 +26,9 @@
     </div>
 </div>
 
-<p>
-   
-</p>
 <table class="table">
     <thead>
         <tr>
-
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -64,7 +63,6 @@
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    
             </td>
         </tr>
 }
