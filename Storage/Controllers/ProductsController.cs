@@ -175,7 +175,7 @@ namespace Storage.Controllers
         }
 
         // POST: Products/ProductSearchViewModel
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> ProductSearchViewModel(string category)
         {
 

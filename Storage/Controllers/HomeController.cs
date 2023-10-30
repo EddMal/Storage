@@ -15,7 +15,8 @@ namespace Storage.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            
+            return RedirectToAction("Index", "ProductsController", null);
         }
 
         public IActionResult Privacy()
