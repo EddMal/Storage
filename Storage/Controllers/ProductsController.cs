@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -155,9 +156,55 @@ namespace Storage.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+
+        // GET: Products/ProductViewModel
+        [HttpGet]
+        public async Task<IActionResult> ProductViewModel()
+        {
+
+            IEnumerable<ProductViewModel> viewModel = await _context.Product.Select(p => new ProductViewModel
+            {
+                Name = p.Name,
+                Price = p.Price,
+                Count = p.Count,
+                InventoryValue = p.Price * p.Count
+
+            }).ToListAsync();
+
+            return View(viewModel);
+        }
+
+        // POST: Products/ProductSearchViewModel
+        [HttpGet]
+        public async Task<IActionResult> ProductSearchViewModel(string category)
+        {
+
+            if (category == null || _context.Product == null)
+            {
+                return NotFound();
+            }
+
+            IEnumerable<ProductViewModel> viewModel = await _context.Product.Where(p => p.Category == category).Select(p => new ProductViewModel
+            {
+                Name = p.Name,
+                Price = p.Price,
+                Count = p.Count,
+                InventoryValue = p.Price * p.Count
+
+            }).ToListAsync();
+
+            if (viewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(viewModel);
+        }
+
         private bool ProductExists(int id)
         {
-          return (_context.Product?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Product?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
     }
 }
