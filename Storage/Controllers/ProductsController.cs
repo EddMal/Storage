@@ -24,8 +24,8 @@ namespace Storage.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Product != null ? 
-                          View(await _context.Product.ToListAsync()) :
-                          Problem("Entity set 'StorageContext.Product'  is null.");
+                          View(await _context.Product.ToListAsync()) :          
+                Problem("Entity set 'StorageContext.Product'  is null.");
         }
 
         // GET: Products/Details/5
@@ -175,7 +175,8 @@ namespace Storage.Controllers
         }
 
         // POST: Products/ProductSearchViewModel
-        [HttpGet]
+        //[HttpGet]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> ProductSearchViewModel(string category)
         {
 
@@ -186,6 +187,7 @@ namespace Storage.Controllers
 
             IEnumerable<ProductViewModel> viewModel = await _context.Product.Where(p => p.Category == category).Select(p => new ProductViewModel
             {
+                Id = p.Id,
                 Name = p.Name,
                 Price = p.Price,
                 Count = p.Count,

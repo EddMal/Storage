@@ -9,11 +9,13 @@ namespace Storage
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<StorageContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("StorageContext") ?? throw new InvalidOperationException("Connection string 'StorageContext' not found.")));
-
+           
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<StorageContext>(options =>
+               options.UseSqlServer(builder.Configuration.GetConnectionString("StorageContext") ?? throw new InvalidOperationException("Connection string 'StorageContext' not found.")));
+
 
             var app = builder.Build();
 
@@ -35,7 +37,7 @@ namespace Storage
             app.MapControllerRoute(
                 name: "default",
                 //(Changed from Home to products controller
-                pattern: "{controller=Products}/{action=Index}/{id?}");
+                pattern: "{controller=Products}/{action=ProductViewModel}/{id?}");
 
             app.Run();
         }

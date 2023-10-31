@@ -1,16 +1,57 @@
 ﻿@model IEnumerable<Storage.Models.ProductViewModel>
-
 @{
+    var test = new Product();
     ViewData["Title"] = "ProductSearchViewModel";
 }
 
-<form action="ProductSearchViewModel">
+@* <form action="ProductSearchViewModel">
     <p>Filter result by searching for category:</p>
     <div class="input-group mb3">
         <input type="text" class="form-control" name="category" placeholder="Kategori">
         <button class="btn btn-outline-secondary" type="submit">Search</button>
     </div>
+</form> *@
+
+@* <form asp-action="ProductSearchViewModel" asp-controller="Products">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+        <label asp-for="@test.Category" class="control-label"></label>
+        <input type="text" class="form-control" name="category" placeholder="Kategori">
+        <span asp-validation-for="@test.Category" class="text-danger"></span>
+        <button class="btn btn-outline-secondary" id="b2" type="submit">Search</button>
+        <asp:Button ID="b2" OnClick="b2" Text="category" />
+            </div>
+</form> *@
+
+
+@* <form asp-action="ProductSearchViewModel">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+        <label asp-for="@test.Category" class="control-label"></label>
+        <input asp-for="@test.Category" class="form-control" />
+        <span asp-validation-for="@test.Category" class="text-danger"></span>
+            </div>
+    <div class="form-group">
+        <input type="submit" value="ProductSearchViewModel" class="btn btn-primary" />
+    </div>
+</form> *@
+
+<form asp-action="ProductSearchViewModel" method="get">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="@test.Category" class="control-label"></label>
+        @* 1. Problem usage of input asp-for="@category, send/data/routing, as is breaks the valiadation, but sends data.
+        2. When = @test.Category validation works but data is not being sent to ProductSearch.
+        3. Solve by adding name = category.
+        *@
+        <input asp-for="@test.Category" name="category" class="form-control" />
+        <span asp-validation-for="@test.Category" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="ProductSearchViewModel" class="btn btn-primary" />
+    </div>
 </form>
+
 
 <table class="table">
     <thead>
@@ -46,11 +87,17 @@
                 @Html.DisplayFor(modelItem => item.InventoryValue)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>| *@
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
