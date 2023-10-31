@@ -3,11 +3,10 @@
 @{
     ViewData["Title"] = "ProductViewModel";
     var test = new Product();
-    string category = "category";
+    //string category = "category";
 }
 
-<h1>ProductViewModel</h1>
-<p>Filter result by searching for category:</p>
+<h1>Product View</h1>
 
 @* <form asp-action="ProductSearchViewModel">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -34,16 +33,18 @@
 <form asp-action="ProductSearchViewModel" method="get">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
-        <label asp-for="@test.Category" class="control-label"></label>
+        <P>Search items by category:</P>
+@*         <label asp-for="@test.Category" class="control-label"></label>
+ *@       
         @* 1. Problem usage of input asp-for="@category, send/data/routing, as is breaks the valiadation, but sends data.
-        2. When = @test.Category validation works but data is not being sent to ProductSearch.
-        3. Solve by adding name = category.
+           2. When = @test.Category validation works but data is not being sent to ProductSearch.
+           3. Solve by adding name = category.
         *@
         <input asp-for="@test.Category" name="category" class="form-control" />
         <span asp-validation-for="@test.Category" class="text-danger"></span>
     </div>
     <div class="form-group">
-        <input type="submit" value="ProductSearchViewModel" class="btn btn-primary" />
+        <input type="submit" value="Search" class="btn btn-primary" />
     </div>
 </form>
 
@@ -123,9 +124,9 @@
                 @Html.DisplayFor(modelItem => item.InventoryValue)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @*  <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> | *@
+                  <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                     
             </td>
         </tr>

@@ -184,7 +184,7 @@ namespace Storage.Controllers
             {
                 return NotFound();
             }
-
+            //Add "Products Category" to ProductViewModel to pass with return view containing the category search value for display as html title. 
             IEnumerable<ProductViewModel> viewModel = await _context.Product.Where(p => p.Category == category).Select(p => new ProductViewModel
             {
                 Id = p.Id,

@@ -1,6 +1,8 @@
-﻿@model IEnumerable<Storage.Models.ProductViewModel>
+﻿
+@model IEnumerable<Storage.Models.ProductViewModel>
 @{
     var test = new Product();
+    //test.Category;
     ViewData["Title"] = "ProductSearchViewModel";
 }
 
@@ -39,16 +41,19 @@
 <form asp-action="ProductSearchViewModel" method="get">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="form-group">
-        <label asp-for="@test.Category" class="control-label"></label>
-        @* 1. Problem usage of input asp-for="@category, send/data/routing, as is breaks the valiadation, but sends data.
+        <P>Search items by category:</P>
+       @*  <label asp-for="@test.Category" class="control-label"></label> *@
+        
+       @* 1. Problem usage of input asp-for="@category, send/data/routing, as is breaks the valiadation, but sends data.
         2. When = @test.Category validation works but data is not being sent to ProductSearch.
         3. Solve by adding name = category.
         *@
         <input asp-for="@test.Category" name="category" class="form-control" />
         <span asp-validation-for="@test.Category" class="text-danger"></span>
+        
     </div>
     <div class="form-group">
-        <input type="submit" value="ProductSearchViewModel" class="btn btn-primary" />
+        <input type="submit" value="Search" class="btn btn-primary" />
     </div>
 </form>
 
